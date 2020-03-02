@@ -1,12 +1,23 @@
-ARG CATE_PYTHON_BASE_VERSION
-ARG CATE_PYTHON_DEPS_VERSION
+ARG CATE_VERSION
 
-FROM quay.io/bcdev/cate-python-base:${CATE_PYTHON_BASE_VERSION}
+FROM quay.io/bcdev/cate-python-base:${CATE_VERSION}
+
+ARG CATE_VERSION
+ARG CATE_BUILD
+ARG CATE_BRANCH
+ARG CATE_USER_NAME
+
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name="cate python dependencies"
-LABEL CATE_PYTHON_DEPS_VERSION=${CATE_PYTHON_DEPS_VERSION}
+LABEL cate_version=${CATE_VERSION}
+LABEL cate_build=${CATE_BUILD}
+LABEL cate_branch=${CATE_BRANCH}
 
+
+USER ${CATE_USER_NAME}
+
+RUN whoami
 RUN git clone https://github.com/CCI-Tools/cate
 RUN conda env create -f cate/environment.yml
 RUN conda clean -afy

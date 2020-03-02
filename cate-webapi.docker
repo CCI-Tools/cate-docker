@@ -1,11 +1,11 @@
-ARG CATE_PYTHON_DEPS_VERSION
+ARG CATE_VERSION
 
-FROM quay.io/bcdev/cate-python-deps:${CATE_PYTHON_DEPS_VERSION}
+FROM quay.io/bcdev/cate-python-deps:${CATE_VERSION}
 
 ARG CATE_VERSION
 ARG CATE_BUILD
 ARG CATE_BRANCH
-ENV CATE_USER_ROOT=/workspace/cate_user
+ARG CATE_USER_NAME
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name=cate
@@ -16,9 +16,9 @@ RUN echo "Building docker using args:"
 RUN echo "CATE_VERSION:${CATE_VERSION}"
 RUN echo "CATE_BUILD:${CATE_BUILD}"
 RUN echo "CATE_BRANCH:${CATE_BRANCH}"
-RUN echo "CATE_USER_ROOT:${CATE_USER_ROOT}"
 
-RUN mkdir -p ${CATE_USER_ROOT}
+USER ${CATE_USER_NAME}
+
 RUN source activate cate-env && pip install git+https://github.com/CCI-Tools/cate.git@${CATE_BRANCH}
 
 CMD ["/bin/bash", "-c", "source activate cate-env && cate-webapi-start -v -p 4000 -a 0.0.0.0"]

@@ -1,0 +1,28 @@
+FROM node:stretch-slim as build-deps
+
+LABEL maintainer="helge.dzierzon@brockmann-consult.de"
+LABEL name=cate
+LABEL cate_version=${CATE_VERSION}
+LABEL cate_build=${CATE_BUILD}
+
+RUN apt-get -y update && apt-get install -y git
+
+RUN git clone https://github.com/CCI-Tools/cate-webui /usr/src/app
+WORKDIR /usr/src/app
+RUN git pull && git checkout dzelge_xxx_cors
+
+RUN yarn install --network-concurrency 1 --network-timeout 1000000
+
+# Fix blueprintjs bug
+COPY ./icon.tsx node_modules/@blueprintjs/core/src/components/icon/icon.tsx
+
+RUN yarn build
+#RUN yarn global add serve
+
+#CMD ["bash", "-c", "serve -l 80 -d"]
+
+# Stage 2 - the production environment
+FROM nginx:1.12-alpine
+COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

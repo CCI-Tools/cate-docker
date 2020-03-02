@@ -1,25 +1,31 @@
-ARG CATE_PYTHON_DEPS_VERSION
+ARG CATE_VERSION
 
-FROM quay.io/bcdev/cate-python-deps:${CATE_PYTHON_DEPS_VERSION}
+FROM quay.io/bcdev/cate-python-deps:${CATE_VERSION}
 
 ARG CATE_VERSION
 ARG CATE_BUILD
 ARG CATE_BRANCH
-ENV CATE_USER_ROOT=/workspace/cate_user
+ARG CATE_USER_NAME
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name=cate
 LABEL cate_version=${CATE_VERSION}
 LABEL cate_build=${CATE_BUILD}
+LABEL cate_branch=${CATE_BRANCH}
 
 RUN echo "Building docker using args:"
 RUN echo "CATE_VERSION:${CATE_VERSION}"
 RUN echo "CATE_BUILD:${CATE_BUILD}"
 RUN echo "CATE_BRANCH:${CATE_BRANCH}"
-RUN echo "CATE_USER_ROOT:${CATE_USER_ROOT}"
+RUN echo "CATE_USER_NAME:${CATE_USER_NAME}"
 
-RUN mkdir -p ${CATE_USER_ROOT}
+USER ${CATE_USER_NAME}
+
+RUN source activate cate-env && conda install -y jupyterhub=0.9.6 jupyterlab
 RUN source activate cate-env && pip install git+https://github.com/CCI-Tools/cate.git@${CATE_BRANCH}
-RUN source activate cate-env && conda install jupyterhub=0.9.6
 
-CMD ["/bin/bash", "-c", "source activate cate-env && cate-webapi-start -v -p 4000 -a 0.0.0.0"]
+WORKDIR "/home/${CATE_USER_NAME}"
+
+EXPOSE 8888
+
+CMD ["/bin/bash", "-c", "source activate cate-env && cate-webapi-start -v -p 8888 -a 0.0.0.0"]

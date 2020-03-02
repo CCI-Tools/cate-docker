@@ -2,20 +2,29 @@ ARG MINICONDA_VERSION
 
 FROM continuumio/miniconda3:$MINICONDA_VERSION
 
-ARG CATE_PYTHON_BASE_VERSION
+ARG CATE_VERSION
+ARG CATE_BUILD
+ARG CATE_BRANCH
+ARG CATE_USER_NAME
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
-LABEL name="cate python minoconda base"
-LABEL cate_python_base_version=${CATE_PYTHON_BASE_VERSION}
+LABEL name="cate python miniconda base"
+LABEL cate_version=${CATE_VERSION}
+LABEL cate_build=${CATE_BUILD}
+LABEL cate_branch=${CATE_BRANCH}
+
 
 SHELL ["/bin/bash", "-c"]
 
-# RUN apt-get -y update && apt-get -y upgrade
+RUN groupadd -g 1000 ${CATE_USER_NAME}
+RUN useradd -u 1000 -g 1000 -ms /bin/bash ${CATE_USER_NAME}
+RUN mkdir /workspace && chown ${CATE_USER_NAME}.${CATE_USER_NAME} /workspace
+RUN chown -R ${CATE_USER_NAME}.${CATE_USER_NAME} /opt/conda
 
-#RUN groupadd -g 1000 ${CATE_USER_NAME}
-#RUN useradd -u 1000 -g 1000 -ms /bin/bash ${CATE_USER_NAME}
-#RUN mkdir /workspace && chown ${CATE_USER_NAME}.${CATE_USER_NAME} /workspace
-# RUN chown -R ${CATE_USER_NAME}.${CATE_USER_NAME} /opt/conda
+RUN apt-get -y update && apt-get -y install vim
+
+ADD bashrc /home/${CATE_USER_NAME}/.bashrc
+RUN chown ${CATE_USER_NAME}.${CATE_USER_NAME} /home/${CATE_USER_NAME}/.bashrc
 
 USER ${CATE_USER_NAME}
 
