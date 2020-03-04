@@ -57,4 +57,4 @@ services:
         - CATE_USER_NAME=${CATE_USER_NAME}
     image: quay.io/bcdev/cate-webui:${CATE_VERSION}.build${CATE_BUILD}
     ports:
-      - "80:80"
+      - "81:80"

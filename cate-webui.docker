@@ -9,7 +9,6 @@ RUN apt-get -y update && apt-get install -y git
 
 RUN git clone https://github.com/CCI-Tools/cate-webui /usr/src/app
 WORKDIR /usr/src/app
-RUN git pull && git checkout dzelge_xxx_cors
 
 RUN yarn install --network-concurrency 1 --network-timeout 1000000
 
@@ -17,12 +16,6 @@ RUN yarn install --network-concurrency 1 --network-timeout 1000000
 COPY ./icon.tsx node_modules/@blueprintjs/core/src/components/icon/icon.tsx
 
 RUN yarn build
-#RUN yarn global add serve
+RUN yarn global add serve
 
-#CMD ["bash", "-c", "serve -l 80 -d"]
-
-# Stage 2 - the production environment
-FROM nginx:1.12-alpine
-COPY --from=build-deps /usr/src/app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["bash", "-c", "serve -l 80 -d -s build"]
