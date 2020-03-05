@@ -8,10 +8,10 @@ services:
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_BUILD=${CATE_BUILD}
+        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
         - CATE_USER_NAME=${CATE_USER_NAME}
         - MINICONDA_VERSION=${MINICONDA_VERSION}
-    image: quay.io/bcdev/cate-python-base:${CATE_VERSION}
+    image: quay.io/bcdev/cate-python-base:${CATE_VERSION}.build${CATE_DOCKER_BUILD}
   cate-python-deps:
     build:
       context: .
@@ -19,9 +19,9 @@ services:
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_BUILD=${CATE_BUILD}
+        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-python-deps:${CATE_VERSION}
+    image: quay.io/bcdev/cate-python-deps:${CATE_VERSION}.build${CATE_DOCKER_BUILD}
   cate-webapi:
     build:
       context: .
@@ -29,9 +29,9 @@ services:
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_BUILD=${CATE_BUILD}
+        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-webapi:${CATE_VERSION}.build${CATE_BUILD}
+    image: quay.io/bcdev/cate-webapi:${CATE_VERSION}.build${CATE_DOCKER_BUILD}
     ports:
       - 4000:4000
   cate-webapi-k8s:
@@ -41,9 +41,9 @@ services:
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_BUILD=${CATE_BUILD}
+        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-webapi-k8s:${CATE_VERSION}.build${CATE_BUILD}
+    image: quay.io/bcdev/cate-webapi-k8s:${CATE_VERSION}.build${CATE_DOCKER_BUILD}
     ports:
       - "8888:8888"
   cate-webui:
@@ -53,8 +53,8 @@ services:
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_BUILD=${CATE_BUILD}
+        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-webui:${CATE_VERSION}.build${CATE_BUILD}
+    image: quay.io/bcdev/cate-webui:${CATE_VERSION}.build${CATE_DOCKER_BUILD}
     ports:
       - "81:80"
