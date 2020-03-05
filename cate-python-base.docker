@@ -3,14 +3,14 @@ ARG MINICONDA_VERSION
 FROM continuumio/miniconda3:$MINICONDA_VERSION
 
 ARG CATE_VERSION
-ARG CATE_BUILD
+ARG CATE_DOCKER_BUILD
 ARG CATE_BRANCH
 ARG CATE_USER_NAME
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name="cate python miniconda base"
 LABEL cate_version=${CATE_VERSION}
-LABEL cate_build=${CATE_BUILD}
+LABEL cate_build=${CATE_DOCKER_BUILD}
 LABEL cate_branch=${CATE_BRANCH}
 
 
