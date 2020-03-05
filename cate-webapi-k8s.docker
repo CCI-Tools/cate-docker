@@ -1,6 +1,7 @@
 ARG CATE_VERSION
+ARG CATE_DOCKER_BUILD
 
-FROM quay.io/bcdev/cate-python-deps:${CATE_VERSION}
+FROM quay.io/bcdev/cate-python-deps:${CATE_VERSION}.build${CATE_DOCKER_BUILD}
 
 ARG CATE_VERSION
 ARG CATE_DOCKER_BUILD
