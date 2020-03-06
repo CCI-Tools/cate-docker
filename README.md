@@ -1,17 +1,32 @@
-[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate)
-
-# Cate docker base-image
+# Cate Docker Images
 
 This repository aims at providing a configuration for a docker base image
 that can be used to run cate services like `cate-webapi-start`.
 
-## Running cate from a docker container using this image
+## Cate Base Image
+
+[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate-python-deps/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate-python)
+
+## Cate Dependency Image
+
+[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate-python-deps/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate-python-deps)
+
+## Cate WebAPI Image
+
+[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate-webapi/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate-webapi)
+
+## Cate WebAPI for K8s Image
+
+[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate-webapi-k8s/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate-webapi-k8s)
+
+
+## Running cate from the docker base container using this image
 
 Cate for docker is currently hosted on quay.io. Hence, use the following
 command in order to run cate:
 
 ```shell script
-docker run -it quay.io/bcdev/cate bash
+docker run -it quay.io/bcdev/cate-webapi bash
 ```
 
 This will open a bash session with an activated cate Python environment. However,
