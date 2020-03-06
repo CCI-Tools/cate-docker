@@ -20,15 +20,14 @@ SHELL ["/bin/bash", "-c"]
 RUN groupadd -g 1000 ${CATE_USER_NAME}
 RUN useradd -u 1000 -g 1000 -ms /bin/bash ${CATE_USER_NAME}
 RUN mkdir /workspace && chown ${CATE_USER_NAME}.${CATE_USER_NAME} /workspace
+COPY --chown=1000:1000 bashrc /home/${CATE_USER_NAME}/.bashrc
 RUN chown -R ${CATE_USER_NAME}.${CATE_USER_NAME} /opt/conda
-
-COPY --chown=${CATE_USER_NAME}:${CATE_USER_NAME} bashrc /home/${CATE_USER_NAME}/.bashrc
 
 USER ${CATE_USER_NAME}
 
 WORKDIR /workspace
 
-RUN source activate base && conda init
+RUN source activate base && conda update -n base conda && conda init
 
 RUN echo "conda activate cate-env" >> ~/.bashrc
 
