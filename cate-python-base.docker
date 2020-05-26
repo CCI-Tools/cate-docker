@@ -3,15 +3,13 @@ ARG MINICONDA_VERSION
 FROM continuumio/miniconda3:${MINICONDA_VERSION}
 
 ARG CATE_VERSION
-ARG CATE_DOCKER_BUILD
-ARG CATE_BRANCH
+ARG CATE_DOCKER_VERSION
 ARG CATE_USER_NAME
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
-LABEL name="cate python miniconda base"
+LABEL name="cate miniconda base"
 LABEL cate_version=${CATE_VERSION}
-LABEL cate_build=${CATE_DOCKER_BUILD}
-LABEL cate_branch=${CATE_BRANCH}
+LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
 USER root
 RUN apt-get -y update && apt-get -y install vim
@@ -28,6 +26,7 @@ USER ${CATE_USER_NAME}
 WORKDIR /workspace
 
 RUN source activate base && conda update -n base conda && conda init
+RUN source activate base && conda install -y -c conda-forge mamba
 
 RUN echo "conda activate cate-env" >> ~/.bashrc
 

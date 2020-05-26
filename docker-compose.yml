@@ -7,31 +7,28 @@ services:
       dockerfile: cate-python-base.docker
       args:
         - CATE_VERSION=${CATE_VERSION}
-        - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
         - CATE_USER_NAME=${CATE_USER_NAME}
+        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - MINICONDA_VERSION=${MINICONDA_VERSION}
-    image: quay.io/bcdev/cate-python-base:${CATE_VERSION}${CATE_DOCKER_BUILD}
+    image: quay.io/bcdev/cate-python-base:${CATE_VERSION}
   cate-python-deps:
     build:
       context: .
       dockerfile: cate-python-deps.docker
       args:
         - CATE_VERSION=${CATE_VERSION}
-        - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
+        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-python-deps:${CATE_VERSION}${CATE_DOCKER_BUILD}
-  cate-webapi:
+    image: quay.io/bcdev/cate-python-deps:${CATE_VERSION}
+  cate:
     build:
       context: .
-      dockerfile: cate-webapi.docker
+      dockerfile: cate.docker
       args:
         - CATE_VERSION=${CATE_VERSION}
-        - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
+        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-webapi:${CATE_VERSION}${CATE_DOCKER_BUILD}
+    image: quay.io/bcdev/cate:${CATE_VERSION}
     ports:
       - 4000:4000
   cate-webapi-k8s:
@@ -40,10 +37,9 @@ services:
       dockerfile: cate-webapi-k8s.docker
       args:
         - CATE_VERSION=${CATE_VERSION}
-        - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
+        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-webapi-k8s:${CATE_VERSION}${CATE_DOCKER_BUILD}
+    image: quay.io/bcdev/cate-webapi-k8s:${CATE_VERSION}
     ports:
       - "8888:8888"
   cate-webui:
@@ -52,9 +48,8 @@ services:
       dockerfile: cate-webui.docker
       args:
         - CATE_VERSION=${CATE_VERSION}
-        - CATE_BRANCH=${CATE_BRANCH}
-        - CATE_DOCKER_BUILD=${CATE_DOCKER_BUILD}
+        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-webui:${CATE_VERSION}${CATE_DOCKER_BUILD}
+    image: quay.io/bcdev/cate-webui:${CATE_VERSION}
     ports:
       - "80:80"

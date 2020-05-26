@@ -1,28 +1,19 @@
 ARG CATE_VERSION
-ARG CATE_DOCKER_BUILD
 
-FROM quay.io/bcdev/cate-python-deps:${CATE_VERSION}${CATE_DOCKER_BUILD}
+FROM quay.io/bcdev/cate:${CATE_VERSION}
 
 ARG CATE_VERSION
-ARG CATE_DOCKER_BUILD
-ARG CATE_BRANCH
+ARG CATE_DOCKER_VERSION
 ARG CATE_USER_NAME
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
-LABEL name=cate
+LABEL name="cate webapi for k8s"
 LABEL cate_version=${CATE_VERSION}
-LABEL cate_build=${CATE_DOCKER_BUILD}
-
-RUN echo "Building docker using args:"
-RUN echo "CATE_VERSION:${CATE_VERSION}"
-RUN echo "CATE_BUILD:${CATE_BUILD}"
-RUN echo "CATE_BRANCH:${CATE_BRANCH}"
-RUN echo "CATE_USER_NAME:${CATE_USER_NAME}"
+LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
 USER ${CATE_USER_NAME}
 
-RUN source activate cate-env && conda install -y jupyterhub=0.9.6 jupyterlab
-RUN source activate cate-env && pip install git+https://github.com/CCI-Tools/cate.git@${CATE_BRANCH}
+RUN source activate cate-env && mamba install -y jupyterhub=0.9.6 jupyterlab
 
 WORKDIR "/home/${CATE_USER_NAME}"
 
