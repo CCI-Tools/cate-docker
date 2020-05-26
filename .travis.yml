@@ -11,7 +11,7 @@ before_script:
 
 script:
   - for svc in $(cat docker-compose.yml | shyaml keys  services);
-      do docker-compose build $svc && docker-compose push $svc;
+      do docker-compose build $svc;
     done;
 
 deploy:
