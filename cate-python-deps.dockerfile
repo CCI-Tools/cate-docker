@@ -15,6 +15,7 @@ LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 USER ${CATE_USER_NAME}
 
 RUN whoami
+RUN echo 'helge'
 RUN git clone https://github.com/CCI-Tools/cate
 RUN mamba env create -f  cate/environment.yml
 RUN conda info --envs

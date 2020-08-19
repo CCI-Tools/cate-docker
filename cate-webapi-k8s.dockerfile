@@ -12,7 +12,7 @@ LABEL cate_version=${CATE_VERSION}
 LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
 USER ${CATE_USER_NAME}
-
+RUN echo 'hello'
 RUN source activate cate-env && mamba install -y jupyterhub=0.9.6 jupyterlab
 
 WORKDIR "/home/${CATE_USER_NAME}"
