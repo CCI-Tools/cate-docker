@@ -11,6 +11,8 @@ LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
 RUN apt-get -y update && apt-get install -y git wget
 
+RUN echo ${CATE_VERSION}
+
 RUN wget https://github.com/CCI-Tools/cate-webui/archive/v${CATE_VERSION}.tar.gz
 RUN mkdir /usr/src/app && tar xvf v${CATE_VERSION}.tar.gz -C /usr/src/app
 
