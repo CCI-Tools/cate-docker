@@ -9,15 +9,16 @@ LABEL name="cate webui"
 LABEL cate_version=${CATE_VERSION}
 LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
-RUN apt-get -y update && apt-get install -y git
+RUN apt-get -y update && apt-get install -y git wget
 
-RUN git clone https://github.com/CCI-Tools/cate-webui /usr/src/app
-WORKDIR /usr/src/app
+RUN wget https://github.com/CCI-Tools/cate-webui/archive/v${CATE_VERSION}.tar.gz
+RUN mkdir /usr/src/app && tar xvf v${CATE_VERSION}.tar.gz -C /usr/src/app
+
+WORKDIR /usr/src/app/cate-webui-${CATE_VERSION}
 
 RUN yarn install --network-concurrency 1 --network-timeout 1000000
 
-# Fixes blueprintjs bug
-# COPY ./icon.tsx "node_modules/@blueprintjs/core/src/components/icon/icon.tsx"
+ADD .env.webui .env
 
 RUN yarn build
 RUN yarn global add serve
