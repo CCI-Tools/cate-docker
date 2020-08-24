@@ -1,25 +1,6 @@
 version: '3'
 
 services:
-  cate-python-base:
-    build:
-      context: .
-      dockerfile: cate-python-base.dockerfile
-      args:
-        - CATE_VERSION=${CATE_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - MINICONDA_VERSION=${MINICONDA_VERSION}
-    image: quay.io/bcdev/cate-python-base:${CATE_VERSION}
-  cate-python-deps:
-    build:
-      context: .
-      dockerfile: cate-python-deps.dockerfile
-      args:
-        - CATE_VERSION=${CATE_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-python-deps:${CATE_VERSION}
   cate:
     build:
       context: .
