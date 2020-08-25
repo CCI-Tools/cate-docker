@@ -16,13 +16,13 @@ services:
   cate-jupyter:
     build:
       context: .
-      dockerfile: cate-webapi-jupyter.dockerfile
+      dockerfile: cate-jupyter.dockerfile
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
         - JUPYTER_VERSION=${JUPYTER_VERSION}
-    image: quay.io/bcdev/cate-webapi-jupyter:${CATE_VERSION}
+    image: quay.io/bcdev/cate-jupyter:${CATE_VERSION}
   cate-webui:
       build:
         context: .

@@ -19,5 +19,5 @@ deploy:
   script: docker-compose push
   skip_cleanup: true
   on:
-    all_branches: true
+    branch: master
 
