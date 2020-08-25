@@ -5,20 +5,6 @@
 This repository aims at providing a configuration for a docker base image
 that can be used to run cate services like `cate-webapi-start`.
 
-## Cate Image
-
-[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate)
-
-
-## Cate WebAPI for K8s Image
-
-[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate-webapi-k8s/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate-webapi-k8s)
-
-
-## Cate Webui
-
-[![Docker Repository on Quay](https://quay.io/repository/bcdev/cate-webui/status "Docker Repository on Quay")](https://quay.io/repository/bcdev/cate-webui)
-
 ## Running cate from the docker base container using this image
 
 Cate for docker is currently hosted on quay.io. Hence, use the following

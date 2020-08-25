@@ -9,20 +9,20 @@ services:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
-        - CATE_IS_STAGE=${CATE_IS_STAGE}
         - MINICONDA_VERSION=${MINICONDA_VERSION}
     image: quay.io/bcdev/cate:${CATE_VERSION}
     ports:
       - 4000:4000
-  cate-webapi-k8s:
+  cate-jupyter:
     build:
       context: .
-      dockerfile: cate-webapi-k8s.dockerfile
+      dockerfile: cate-webapi-jupyter.dockerfile
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
-    image: quay.io/bcdev/cate-webapi-k8s:${CATE_VERSION}
+        - JUPYTER_VERSION=${JUPYTER_VERSION}
+    image: quay.io/bcdev/cate-webapi-jupyter:${CATE_VERSION}
   cate-webui:
       build:
         context: .
@@ -31,7 +31,6 @@ services:
           - CATE_VERSION=${CATE_VERSION}
           - CATE_WEBUI_VERSION=${CATE_WEBUI_VERSION}
           - CATE_USER_NAME=${CATE_USER_NAME}
-          - CATE_IS_STAGE=${CATE_IS_STAGE}
       image: quay.io/bcdev/cate-webui:${CATE_WEBUI_VERSION}
       ports:
         - "82:80"

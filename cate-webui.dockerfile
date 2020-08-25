@@ -2,24 +2,24 @@ FROM node:stretch-slim as build-deps
 
 ARG CATE_VERSION
 ARG CATE_DOCKER_VERSION
-ARG CATE_WEBUI_VERSION
 ARG CATE_USER_NAME
-ARG CATE_IS_STAGE
+
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name="cate webui"
 LABEL cate_version=${CATE_VERSION}
 LABEL cate_webui_version=${CATE_WEBUI_VERSION}
 LABEL cate_docker_version=${CATE_DOCKER_VERSION}
-LABEL cate_is_stage=${CATE_IS_STAGE}
 
 RUN apt-get -y update && apt-get install -y git wget
 
-RUN echo ${CATE_VERSION}
+ARG CATE_WEBUI_VERSION
+
+RUN echo ${CATE_WEBUI_VERSION}
 
 RUN mkdir /usr/src/app
 
-RUN if [ ${CATE_IS_STAGE} = 0 ]; then \
+RUN if [[ ${CATE_WEBUI_VERSION} == *"dev"* ]]; then \
         echo "-------------------------------------------------"; \
         echo "Loading release ${CATE_WEBUI_VERSION}"; \
         echo "-------------------------------------------------"; \

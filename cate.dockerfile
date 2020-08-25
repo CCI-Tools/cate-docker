@@ -2,14 +2,12 @@ ARG MINICONDA_VERSION
 
 FROM continuumio/miniconda3:${MINICONDA_VERSION}
 
-ARG CATE_VERSION
 ARG CATE_DOCKER_VERSION
 ARG CATE_USER_NAME
 ARG CATE_IS_STAGE
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name=cate
-LABEL cate_version=${CATE_VERSION}
 LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
 RUN echo "Building docker using args:"
@@ -38,18 +36,20 @@ RUN echo "conda activate cate-env" >> ~/.bashrc
 
 # STAGE CATE DOWNLOAD
 
+ARG CATE_VERSION
+
 RUN whoami
-RUN if [ '${CATE_STAGE}' = 0 ]; then \
-        echo "-------------------------------------------------"; \
-        echo "Loading release ${CATE_VERSION}"; \
-        echo "-------------------------------------------------"; \
-        wget https://github.com/CCI-Tools/cate/archive/v${CATE_VERSION}.tar.gz; \
-        tar xvf v${CATE_VERSION}.tar.gz; \
-    else \
-        echo "-------------------------------------------------"; \
-        echo "Loading Stage dev version ${CATE_VERSION}"; \
-        echo "-------------------------------------------------"; \
-        git clone https://github.com/CCI-Tools/cate cate-${CATE_VERSION}; \
+RUN if [[ ${CATE_VERSION} == *"dev"* ]]; then \
+            echo "-------------------------------------------------"; \
+            echo "Loading dev version ${CATE_VERSION}"; \
+            echo "-------------------------------------------------"; \
+            git clone https://github.com/CCI-Tools/cate cate-${CATE_VERSION}; \
+     else \
+            echo "-------------------------------------------------"; \
+            echo "Loading release ${CATE_VERSION}"; \
+            echo "-------------------------------------------------"; \
+            wget https://github.com/CCI-Tools/cate/archive/v${CATE_VERSION}.tar.gz; \
+            tar xvf v${CATE_VERSION}.tar.gz; \
     fi
 
 # STAGE INSTALL CONDA DEPENDENCIES
