@@ -14,6 +14,7 @@ RUN echo "Building docker using args:"
 RUN echo "CATE_VERSION:${CATE_VERSION}"
 
 # STAGE LINUX/CONDA BASICS
+SHELL ["/bin/bash", "-c"]
 
 USER root
 RUN apt-get -y update && apt-get -y install vim

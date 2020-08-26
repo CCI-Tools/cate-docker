@@ -12,7 +12,7 @@ services:
         - MINICONDA_VERSION=${MINICONDA_VERSION}
     image: quay.io/bcdev/cate:${CATE_VERSION}
     ports:
-      - 4000:4000
+      - 4001:4000
   cate-jupyter:
     build:
       context: .
