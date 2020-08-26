@@ -61,10 +61,10 @@ RUN source activate cate-env && conda list
 
 # STAGE INSTALL CATE
 
+RUN source activate cate-env && cd cate-${CATE_VERSION} && pip install .
+
 USER ${CATE_USER_NAME}
 
 WORKDIR /home/${CATE_USER_NAME}
-
-RUN source activate cate-env && cd cate-${CATE_VERSION} && pip install .
 
 CMD ["/bin/bash", "-c", "source activate cate-env && cate-webapi-start -v -p 4000 -a 0.0.0.0"]
