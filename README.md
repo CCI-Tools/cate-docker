@@ -57,11 +57,11 @@ to quay.io. These versions need to be manually pushed using:
 docker-compose push
 ```    
 
-## Software Versions used in 0.1.3
+## Software Versions used in 0.1.4
 
 | Software   | Version |
 |------------|---------|
-| cate       | 2.1.0   |
-| cate-webui | 2.1.0   |
+| cate       | 2.1.1   |
+| cate-webui | 2.1.1   |
 | miniconda  | 4.8.2   |
 | jupyter    | 0.9.6   |
