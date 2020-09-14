@@ -10,7 +10,7 @@ services:
         - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
         - MINICONDA_VERSION=${MINICONDA_VERSION}
-    image: quay.io/bcdev/cate:helge1
+    image: quay.io/bcdev/cate:${CATE_VERSION}
     ports:
       - 4001:4000
   cate-jupyter:
