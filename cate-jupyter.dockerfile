@@ -14,7 +14,7 @@ LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
 USER ${CATE_USER_NAME}
 
-RUN source activate cate-env && mamba install -y jupyterhub=${JUPYTER_VERSION} jupyterlab
+RUN source activate cate-env && mamba install -y -c conda-forge jupyterhub=${JUPYTER_VERSION} jupyterlab
 
 WORKDIR "/home/${CATE_USER_NAME}"
 
