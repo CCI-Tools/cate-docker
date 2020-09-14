@@ -10,9 +10,9 @@ before_script:
   - pip install --user shyaml
 
 script:
-  - for svc in $(cat docker-compose.yml | shyaml keys  services);
-      do docker-compose build $svc;
-    done;
+  - docker-compose build cate
+  - docker-compose build cate-jupyter
+  - docker-compose build cate-webui
 
 deploy:
   provider: script
