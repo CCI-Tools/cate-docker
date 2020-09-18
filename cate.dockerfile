@@ -4,10 +4,11 @@ FROM continuumio/miniconda3:${MINICONDA_VERSION}
 
 ARG CATE_DOCKER_VERSION
 ARG CATE_USER_NAME
-ARG CATE_IS_STAGE
+ARG CATE_VESION
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name=cate
+LABEL cate_version=CATE_VERSION
 LABEL cate_docker_version=${CATE_DOCKER_VERSION}
 
 RUN echo "Building docker using args:"
