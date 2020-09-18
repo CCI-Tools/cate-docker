@@ -61,7 +61,7 @@ docker-compose push
 
 | Software   | Version |
 |------------|---------|
-| cate       | 2.1.1   |
-| cate-webui | 2.1.2   |
+| cate       | 2.1.3   |
+| cate-webui | 2.2.0   |
 | miniconda  | 4.8.2   |
 | jupyter    | 0.9.6   |
