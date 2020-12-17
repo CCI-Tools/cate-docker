@@ -36,7 +36,7 @@ docker run -it -v $PWD:/workspace quay.io/bcdev/cate bash
 The following docker-compose configuration can be used to run cate, here, its web service.
  
 
-## Release process for teh cate Docker Image
+## Release process for the cate Docker Image
 
 - Clone or fork [cate-docker repository](https://github.com/CCI-Tools/cate-docker.
 - Create a new branch called [your_user_name]_[new_version]
@@ -63,5 +63,3 @@ docker-compose push
 |------------|---------|
 | cate       | 2.1.3   |
 | cate-webui | 2.2.0   |
-| miniconda  | 4.8.2   |
-| jupyter    | 0.9.6   |
