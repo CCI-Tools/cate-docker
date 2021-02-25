@@ -4,6 +4,14 @@
 - Cate releases are now installed from ccitools conda repo
 - Added browserslist update to webui docker config
 - Docker repos are now hosted in bcdev's quay organisation `ccitools`
+- Renamed `cate-webui` references to `cate-app`
+- The cate webui build process does now run `git clone` if the 
+  version tag contains `latest`. Otherwise, it downloads the cate-app version's release
+  archive.
+- The cate build process does now run `git clone` if the
+  version tag contains `latest`. Otherwise, it downloads the cate-app version's release
+  archive if version contains `dev` or installs cate from `conda-forge`.
+
 
 ## Changes version 2.0.1
 

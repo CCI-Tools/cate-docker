@@ -13,12 +13,23 @@ if [[ $CATE_VERSION == *"dev"* ]]; then
 
   mamba env create .
   source activate cate-env && pip install .
-  echo "conda activate cate-env" >> ~/.bashrc
+elif [[ $CATE_VERSION == *"latest" ]]; then
+  echo "-------------------------------------------------";
+  echo "Installing dev version ${CATE_VERSION}"           ;
+  echo "-------------------------------------------------";
+
+  git clone https://github.com/CCI-Tools/cate
+
+  cd cate || exit
+
+  mamba env create .
+  source activate cate-env && pip install .
 else
   echo "-------------------------------------------------";
   echo "Installing release version ${CATE_VERSION}" ;
   echo "-------------------------------------------------";
 
   mamba create -y -n cate-env -c ccitools cate="${CATE_VERSION}"
-  echo "conda activate cate-env" >> ~/.bashrc
 fi
+
+echo "conda activate cate-env" >> ~/.bashrc

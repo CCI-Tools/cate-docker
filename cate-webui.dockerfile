@@ -18,7 +18,7 @@ RUN echo ${CATE_WEBUI_VERSION}
 
 RUN mkdir /usr/src/app
 
-RUN if [[ ${CATE_WEBUI_VERSION} == *"dev"* ]]; then \
+RUN if [[ ${CATE_WEBUI_VERSION} == *"latest" ]]; then \
         echo "-------------------------------------------------"; \
         echo "Loading Stage dev version ${CATE_WEBUI_VERSION}"; \
         echo "-------------------------------------------------"; \
@@ -31,7 +31,9 @@ RUN if [[ ${CATE_WEBUI_VERSION} == *"dev"* ]]; then \
         tar xvf v${CATE_WEBUI_VERSION}.tar.gz -C /usr/src/app ; \
     fi
 
-WORKDIR /usr/src/app/cate-webui-${CATE_WEBUI_VERSION}
+RUN ls -al /usr/src/app
+
+WORKDIR /usr/src/app/cate-app-${CATE_WEBUI_VERSION}
 
 RUN ls -l
 RUN yarn install --network-concurrency 1 --network-timeout 1000000
