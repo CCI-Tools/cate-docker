@@ -3,7 +3,7 @@
 # Cate Docker Images
 
 This repository aims at providing a configuration for a docker base image
-that can be used to run cate services. Main aim is to configure cate to run in a K8s environment.
+that can be used to run cate services. Main aim is to configure `cate` to run in a K8s environment.
 
 ## Images that will be built
 
@@ -57,9 +57,15 @@ to quay.io. These versions need to be manually pushed using:
 docker-compose push
 ```    
 
-## Software Versions used in 0.1.4
+## Software Versions used in 2.0.2
 
-| Software   | Version |
-|------------|---------|
-| cate       | 2.1.3   |
-| cate-webui | 2.2.0   |
+__Versions:__
+
+    MINICONDA_VERSION=4.8.2
+    JUPYTER_VERSION=1.1.0
+    
+    CATE_BASE_VERSION=2.1.0
+    CATE_VERSION=2.1.5.dev3
+    CATE_WEBUI_VERSION=2.2.2-dev.5
+    CATE_USER_NAME=cate
+    CATE_DOCKER_VERSION=2.0.2
