@@ -12,6 +12,17 @@
   version tag contains `latest`. Otherwise, it downloads the cate-app version's release
   archive if version contains `dev` or installs cate from `conda-forge`.
 
+__Versions:__
+
+    MINICONDA_VERSION=4.8.2
+    JUPYTER_VERSION=1.1.0
+    
+    CATE_BASE_VERSION=2.1.0
+    CATE_VERSION=2.1.5.dev3
+    CATE_WEBUI_VERSION=2.2.2-dev.5
+    CATE_USER_NAME=cate
+    CATE_DOCKER_VERSION=2.0.2
+
 
 ## Changes version 2.0.1
 
