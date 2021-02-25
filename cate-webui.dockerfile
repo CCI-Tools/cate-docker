@@ -38,6 +38,7 @@ RUN yarn install --network-concurrency 1 --network-timeout 1000000
 
 ADD .env.webui .env
 
+RUN npx browserslist@latest --update-db
 RUN yarn build
 RUN yarn global add serve
 

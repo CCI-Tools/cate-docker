@@ -1,6 +1,6 @@
 ARG CATE_VERSION
 
-FROM quay.io/bcdev/cate:${CATE_VERSION}
+FROM quay.io/ccitools/cate:${CATE_VERSION}
 
 ARG CATE_VERSION
 ARG CATE_DOCKER_VERSION

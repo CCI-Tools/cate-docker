@@ -1,16 +1,27 @@
 version: '3'
 
 services:
+  cate-base:
+    build:
+      context: .
+      dockerfile: cate-base.dockerfile
+      args:
+        - CATE_BASE_VERSION=${CATE_BASE_VERSION}
+        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
+        - CATE_USER_NAME=${CATE_USER_NAME}
+        - MINICONDA_VERSION=${MINICONDA_VERSION}
+    image: quay.io/ccitools/cate-base:${CATE_BASE_VERSION}
   cate:
     build:
       context: .
       dockerfile: cate.dockerfile
       args:
+        - CATE_BASE_VERSION=${CATE_BASE_VERSION}
         - CATE_VERSION=${CATE_VERSION}
         - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
         - MINICONDA_VERSION=${MINICONDA_VERSION}
-    image: quay.io/bcdev/cate:${CATE_VERSION}
+    image: quay.io/ccitools/cate:${CATE_VERSION}
     ports:
       - 4001:4000
   cate-jupyter:
@@ -22,7 +33,7 @@ services:
         - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
         - CATE_USER_NAME=${CATE_USER_NAME}
         - JUPYTER_VERSION=${JUPYTER_VERSION}
-    image: quay.io/bcdev/cate-jupyter:${CATE_VERSION}
+    image: quay.io/ccitools/cate-jupyter:${CATE_VERSION}
   cate-webui:
       build:
         context: .
@@ -32,7 +43,7 @@ services:
           - CATE_WEBUI_VERSION=${CATE_WEBUI_VERSION}
           - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
           - CATE_USER_NAME=${CATE_USER_NAME}
-      image: quay.io/bcdev/cate-webui:${CATE_WEBUI_VERSION}
+      image: quay.io/ccitools/cate-webui:${CATE_WEBUI_VERSION}
       ports:
         - "82:80"
 
