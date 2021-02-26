@@ -10,8 +10,8 @@ __Versions:__
     JUPYTER_VERSION=1.1.0
     
     CATE_BASE_VERSION=2.1.0
-    CATE_VERSION=2.1.5.dev5
-    CATE_APP_VERSION=2.2.2-dev.6
+    CATE_VERSION=2.1.6
+    CATE_APP_VERSION=2.2.2
     CATE_USER_NAME=cate
 
 ## Changes version 2.0.2
