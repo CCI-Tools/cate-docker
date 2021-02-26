@@ -60,7 +60,7 @@ to quay.io. These versions need to be manually pushed using:
 docker-compose push
 ```    
 
-## Software Versions used in 2.0.4
+## Software Versions used in 2.0.3
 
 __Versions:__
 
@@ -68,7 +68,7 @@ __Versions:__
     JUPYTER_VERSION=1.1.0
     
     CATE_BASE_VERSION=2.1.0
-    CATE_VERSION=2.1.5.dev5
-    CATE_APP_VERSION=2.2.2-dev.6
+    CATE_VERSION=2.1.5
+    CATE_APP_VERSION=2.2.2
     CATE_USER_NAME=cate
     CATE_DOCKER_VERSION=2.0.3

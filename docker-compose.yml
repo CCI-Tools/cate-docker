@@ -34,7 +34,7 @@ services:
         - CATE_USER_NAME=${CATE_USER_NAME}
         - JUPYTER_VERSION=${JUPYTER_VERSION}
     image: quay.io/ccitools/cate-jupyter:${CATE_VERSION}
-  cate-webui:
+  cate-app:
       build:
         context: .
         dockerfile: cate-webui.dockerfile
