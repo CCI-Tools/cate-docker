@@ -40,10 +40,10 @@ services:
         dockerfile: cate-webui.dockerfile
         args:
           - CATE_VERSION=${CATE_VERSION}
-          - CATE_WEBUI_VERSION=${CATE_WEBUI_VERSION}
+          - CATE_APP_VERSION=${CATE_APP_VERSION}
           - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
           - CATE_USER_NAME=${CATE_USER_NAME}
-      image: quay.io/ccitools/cate-webui:${CATE_WEBUI_VERSION}
+      image: quay.io/ccitools/cate-webui:${CATE_APP_VERSION}
       ports:
         - "82:80"
 

@@ -38,6 +38,9 @@ The following docker-compose configuration can be used to run cate, here, its we
 
 ## Release process for the cate Docker Image
 
+__Comment__: Please use cate-docker versioning as this repo manages docker images for cate as well as cate-app which
+             follow a different version naming regime.
+
 - Clone or fork [cate-docker repository](https://github.com/CCI-Tools/cate-docker.
 - Create a new branch called [your_user_name]_[new_version]
 - Change Miniconda Version if necessary in .env
@@ -57,7 +60,7 @@ to quay.io. These versions need to be manually pushed using:
 docker-compose push
 ```    
 
-## Software Versions used in 2.0.2
+## Software Versions used in 2.0.4
 
 __Versions:__
 
@@ -65,7 +68,7 @@ __Versions:__
     JUPYTER_VERSION=1.1.0
     
     CATE_BASE_VERSION=2.1.0
-    CATE_VERSION=2.1.5.dev3
-    CATE_WEBUI_VERSION=2.2.2-dev.5
+    CATE_VERSION=2.1.5.dev5
+    CATE_APP_VERSION=2.2.2-dev.6
     CATE_USER_NAME=cate
-    CATE_DOCKER_VERSION=2.0.2
+    CATE_DOCKER_VERSION=2.0.3

@@ -1,3 +1,19 @@
+## Changes version 2.0.3
+
+- Updated cate version to dev4
+- Updated REACT_APP_CATEHUB_ENDPOINT for the cate-app
+- Renamed CATE_WEBUI_VERSION to CATE_APP_VERSION
+
+__Versions:__
+
+    MINICONDA_VERSION=4.8.2
+    JUPYTER_VERSION=1.1.0
+    
+    CATE_BASE_VERSION=2.1.0
+    CATE_VERSION=2.1.5.dev5
+    CATE_APP_VERSION=2.2.2-dev.6
+    CATE_USER_NAME=cate
+
 ## Changes version 2.0.2
 
 - Added a cate base image configuration
@@ -19,7 +35,7 @@ __Versions:__
     
     CATE_BASE_VERSION=2.1.0
     CATE_VERSION=2.1.5.dev3
-    CATE_WEBUI_VERSION=2.2.2-dev.5
+    CATE_APP_VERSION=2.2.2-dev.5
     CATE_USER_NAME=cate
     CATE_DOCKER_VERSION=2.0.2
 
