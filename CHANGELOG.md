@@ -1,3 +1,13 @@
+## Changes in 2.0.4
+
+- Set versions to dev versions
+- Separated stage and prod images for teh cate-app
+- Added install scripts for cate, xcube and xcube-cci
+- Introduced an install mode for the libaries used in order to allow installation from either branch, github release or conda
+- Added a cate-xcube image configuration to combine
+  cate and xcube
+
+
 ## Changes version 2.0.3
 
 - Updated cate version to dev4

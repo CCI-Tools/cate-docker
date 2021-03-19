@@ -1,36 +1,38 @@
 #!/bin/env bash
 
 
-if [[ $CATE_VERSION == *"latest" ]]; then
-  echo "-------------------------------------------------";
-  echo "Installing dev version ${CATE_VERSION}"           ;
-  echo "-------------------------------------------------";
+echo "###################################################################"
+echo "INSTALLING cate-${CATE_VERSION} using mode $CATE_INSTALL_MODE"
+echo "###################################################################"
 
+if [[ $CATE_INSTALL_MODE == "branch" ]]; then
   git clone https://github.com/CCI-Tools/cate
-
   cd cate || exit
+  git checkout "${CATE_VERSION}"
+  cp /tmp/environment.yml .
 
   mamba env create .
-  source activate cate-env && pip install .
-#if [[ $CATE_VERSION == *"dev"* ]]; then
-else
-  echo "-------------------------------------------------";
-  echo "Installing dev version ${CATE_VERSION}"           ;
-  echo "-------------------------------------------------";
+  source activate cate-env
+  python setup.py install
 
+  cd ..
+  rm -rf cate
+elif [[ $CATE_INSTALL_MODE == "github" ]]; then
   wget https://github.com/CCI-Tools/cate/archive/v"${CATE_VERSION}".tar.gz
   tar xvzf v"${CATE_VERSION}".tar.gz
 
   cd cate-"${CATE_VERSION}" || exit
-
+  cp /tmp/environment.yml .
   mamba env create .
-  source activate cate-env && pip install .
-#else
-#  echo "-------------------------------------------------";
-#  echo "Installing release version ${CATE_VERSION}" ;
-#  echo "-------------------------------------------------";
-#
-#  mamba create -y -n cate-env -c ccitools cate="${CATE_VERSION}"
+  source activate cate-env
+  python setup.py install
+
+  cd ..
+  rm v"${CATE_VERSION}".tar.gz
+else
+  echo "Not implemented."
 fi
 
+
 echo "conda activate cate-env" >> ~/.bashrc
+

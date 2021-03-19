@@ -1,12 +1,16 @@
-ARG CATE_BASE_VERSION
+ARG CATE_VERSION
 
-FROM quay.io/ccitools/cate-base:${CATE_BASE_VERSION}
+FROM quay.io/ccitools/cate:${CATE_VERSION}
 
 ARG CATE_DOCKER_VERSION
 ARG CATE_USER_NAME
 ARG CATE_VERSION
 ARG CATE_BASE_VERSION
 ARG CATE_INSTALL_MODE
+ARG XCUBE_INSTALL_MODE
+ARG XCUBE_VERSION
+ARG XCUBE_CCI_INSTALL_MODE
+ARG XCUBE_CCI_VERSION
 
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
 LABEL name=cate
@@ -23,24 +27,21 @@ USER ${CATE_USER_NAME}
 
 WORKDIR /tmp
 
-# STAGE CATE DOWNLOAD
-
-ARG CATE_VERSION
+# STAGE XCUBE DOWNLOAD
 
 RUN whoami
-COPY environment.yml ./
-COPY scripts/install_cate.sh ./
-RUN bash ./install_cate.sh
+COPY scripts/install_xcube.sh ./
+RUN bash ./install_xcube.sh
 
-# STAGE INSTALL CONDA DEPENDENCIES
+COPY scripts/install_xcube_cci.sh ./
+RUN bash ./install_xcube_cci.sh
 
-RUN echo 'Hello'
+
+# STAGE INSTALL XCUBE DEPENDENCIES
+
 RUN conda info --envs
-RUN source activate cate-env && conda list
+#RUN source activate cate-env && conda list
 
-
-#USER ${CATE_USER_NAME}
+USER ${CATE_USER_NAME}
 
 WORKDIR /home/${CATE_USER_NAME}
-
-CMD ["/bin/bash", "-c", "source activate cate-env && cate-webapi-start -v -p 4000 -a 0.0.0.0"]
