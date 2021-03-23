@@ -68,7 +68,7 @@ services:
   cate-app-stage:
       build:
         context: .
-        dockerfile: cate-webui.dockerfile
+        dockerfile: cate-app.dockerfile
         args:
           - CATE_VERSION=${CATE_VERSION}
           - CATE_APP_VERSION=${CATE_APP_VERSION}
@@ -82,7 +82,7 @@ services:
   cate-app-prod:
     build:
       context: .
-      dockerfile: cate-webui.dockerfile
+      dockerfile: cate-app.dockerfile
       args:
         - CATE_VERSION=${CATE_VERSION}
         - CATE_APP_VERSION=${CATE_APP_VERSION}
