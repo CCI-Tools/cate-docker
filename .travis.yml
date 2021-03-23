@@ -11,8 +11,10 @@ before_script:
 
 script:
   - docker-compose build cate
+  - docker-compose build cate-xcube
   - docker-compose build cate-jupyter
-  - docker-compose build cate-app
+  - docker-compose build cate-app-stage
+  - docker-compose build cate-app-prod
 
 deploy:
   provider: script
