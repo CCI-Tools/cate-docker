@@ -28,7 +28,7 @@ WORKDIR /tmp
 ARG CATE_VERSION
 
 RUN whoami
-COPY environment.yml ./
+
 COPY scripts/install_cate.sh ./
 RUN bash ./install_cate.sh
 
