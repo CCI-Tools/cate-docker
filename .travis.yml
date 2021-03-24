@@ -10,9 +10,11 @@ before_script:
   - pip install --user shyaml
 
 script:
+  - docker-compose build cate-base
   - docker-compose build cate
   - docker-compose build cate-xcube
   - docker-compose build cate-jupyter
+#  - docker-compose build cate-pangeo
   - docker-compose build cate-app-stage
   - docker-compose build cate-app-prod
 

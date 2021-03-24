@@ -33,9 +33,10 @@ COPY environment.yml /tmp/environment.yml
 COPY scripts/install_cate.sh ./
 RUN bash ./install_cate.sh
 
+
+
 # STAGE INSTALL CONDA DEPENDENCIES
 
-RUN echo 'Hello'
 RUN conda info --envs
 RUN source activate cate-env && conda list
 

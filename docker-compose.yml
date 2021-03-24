@@ -53,18 +53,19 @@ services:
         - CATE_USER_NAME=${CATE_USER_NAME}
         - JUPYTER_VERSION=${JUPYTER_VERSION}
     image: quay.io/ccitools/cate-jupyter:${CATE_VERSION}
-  cate-pangeo:
-    build:
-      context: .
-      dockerfile: cate-pangeo.dockerfile
-      args:
-        - CATE_VERSION=${CATE_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-        - PANGEO_BASE_NOTEBOOK_VERSION=${PANGEO_BASE_NOTEBOOK_VERSION}
-    image: quay.io/ccitools/cate-pangeo:${CATE_VERSION}
-    ports:
-      - 8888:8888
+# PANGEO NOT USED YET
+#  cate-pangeo:
+#    build:
+#      context: .
+#      dockerfile: cate-pangeo.dockerfile
+#      args:
+#        - CATE_VERSION=${CATE_VERSION}
+#        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
+#        - CATE_USER_NAME=${CATE_USER_NAME}
+#        - PANGEO_BASE_NOTEBOOK_VERSION=${PANGEO_BASE_NOTEBOOK_VERSION}
+#    image: quay.io/ccitools/cate-pangeo:${CATE_VERSION}
+#    ports:
+#      - 8888:8888
   cate-app-stage:
       build:
         context: .
