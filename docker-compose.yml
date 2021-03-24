@@ -80,6 +80,20 @@ services:
       image: quay.io/ccitools/cate-webui:${CATE_APP_VERSION}.stage
       ports:
         - "82:80"
+  cate-app-local:
+    build:
+      context: .
+      dockerfile: cate-app.dockerfile
+      args:
+        - CATE_VERSION=${CATE_VERSION}
+        - CATE_APP_VERSION=${CATE_APP_VERSION}
+        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
+        - CATE_USER_NAME=${CATE_USER_NAME}
+        - CATE_MODE=local
+        - CATE_APP_INSTALL_MODE=${CATE_APP_INSTALL_MODE}
+    image: quay.io/ccitools/cate-webui:${CATE_APP_VERSION}.local
+    ports:
+      - "82:80"
   cate-app-prod:
     build:
       context: .
