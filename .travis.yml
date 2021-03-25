@@ -17,6 +17,7 @@ script:
 #  - docker-compose build cate-pangeo
   - docker-compose build cate-app-stage
   - docker-compose build cate-app-prod
+  - docker-compose build cate-app-local
 
 deploy:
   provider: script
