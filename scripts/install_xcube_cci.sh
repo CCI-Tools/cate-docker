@@ -1,6 +1,6 @@
 
 echo "###################################################################"
-echo "INSTALLING xcube-${XCUBE_VERSION} using mode $XCUBE_INSTALL_MODE"
+echo "INSTALLING xcube-cci-${XCUBE_CCI_VERSION} using mode $XCUBE_CCI_INSTALL_MODE"
 echo "###################################################################"
 
 
@@ -9,7 +9,8 @@ if [[ $XCUBE_CCI_INSTALL_MODE == "branch" ]]; then
   cd xcube-cci || exit
   git checkout "${XCUBE_CCI_VERSION}"
 
-  sed -i 's/xcube/#xcube/g' environment.yml
+  # Had been used to deal with invalid environment definitions
+  # sed -i 's/xcube/#xcube/g' environment.yml
 
   mamba env update -n cate-env
   source activate cate-env
@@ -27,7 +28,8 @@ elif [[ $XCUBE_CCI_INSTALL_MODE == "github" ]]; then
 
   ls -al
 
-  sed -i 's/xcube/#xcube/g' environment.yml
+  # Had been used to deal with invalid environment definitions
+  # sed -i 's/xcube/#xcube/g' environment.yml
 
   mamba env update -n cate-env
 
@@ -41,4 +43,5 @@ else
   mamba update -y -n cate-env -c conda-forge xcube-cci="${XCUBE_CCI_VERSION}"
 fi
 
+# used to ensure all necessary dependencies are included
 mamba install -c conda-forge -y affine click rasterio pydap strict-rfc3339 urllib3 lxml aiohttp nest-asyncio

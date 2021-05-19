@@ -1,3 +1,9 @@
+## Changes in 2.0.5
+- Removed environment.yml
+- Use new xcube and xcube-cci-versions
+- Removed maintenance message
+
+
 ## Changes in 2.0.4
 
 - Set versions to dev versions
