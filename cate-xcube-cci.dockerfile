@@ -30,8 +30,6 @@ WORKDIR /tmp
 # STAGE XCUBE DOWNLOAD
 
 RUN whoami
-COPY scripts/install_xcube.sh ./
-RUN bash ./install_xcube.sh
 
 COPY scripts/install_xcube_cci.sh ./
 RUN bash ./install_xcube_cci.sh

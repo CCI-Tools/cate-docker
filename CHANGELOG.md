@@ -1,8 +1,13 @@
 ## Changes in 2.0.5
 - Removed environment.yml
-- Use new xcube and xcube-cci-versions
+- Removed cate-xcube.dockerfile as xcube is now included in cate
+- Added xcube-cci.dockerfile
 - Removed maintenance message
+__Versions:__
 
+    CATE_VERSION=3.0.0.dev0
+    CATE_APP_VERSION=3.0.0-dev.0
+    XCUBE_CCI_VERSION=0.8.0
 
 ## Changes in 2.0.4
 

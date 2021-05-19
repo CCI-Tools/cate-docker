@@ -25,10 +25,10 @@ services:
     image: quay.io/ccitools/cate:${CATE_VERSION}
     ports:
       - 4001:4000
-  cate-xcube:
+  cate-xcube-cci:
     build:
       context: .
-      dockerfile: cate-xcube.dockerfile
+      dockerfile: cate-xcube-cci.dockerfile
       args:
         - CATE_BASE_VERSION=${CATE_BASE_VERSION}
         - CATE_VERSION=${CATE_VERSION}
@@ -36,8 +36,6 @@ services:
         - CATE_USER_NAME=${CATE_USER_NAME}
         - CATE_INSTALL_MODE=${CATE_INSTALL_MODE}
         - MINICONDA_VERSION=${MINICONDA_VERSION}
-        - XCUBE_INSTALL_MODE=${XCUBE_INSTALL_MODE}
-        - XCUBE_VERSION=${XCUBE_VERSION}
         - XCUBE_CCI_INSTALL_MODE=${XCUBE_CCI_INSTALL_MODE}
         - XCUBE_CCI_VERSION=${XCUBE_CCI_VERSION}
     image: quay.io/ccitools/cate-xcube:${CATE_VERSION}
