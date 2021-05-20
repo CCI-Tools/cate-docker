@@ -1,0 +1,19 @@
+image: Ubuntu
+
+install:
+  - sh: docker login -u $QUAY_USER -p $QUAY_PASSWORD quay.io
+  - sh: pip install --user shyaml
+  - sh: sudo apt-get -y update
+  - sh: sudo apt-get -y install docker-compose
+
+build_script:
+  - sh: docker-compose build cate-base
+  - sh: docker-compose build cate
+  - sh: docker-compose build cate-xcube-cci
+  - sh: docker-compose build cate-jupyter
+  - sh: docker-compose build cate-app-stage
+  - sh: docker-compose build cate-app-prod
+  - sh: docker-compose build cate-app-local
+
+deploy_script:
+  - sh: docker-compose push
