@@ -3,6 +3,8 @@
 - Removed cate-xcube.dockerfile as xcube is now included in cate
 - Added xcube-cci.dockerfile
 - Removed maintenance message
+- Changed from travis CI to appveyor
+
 __Versions:__
 
     CATE_VERSION=3.0.0.dev0
