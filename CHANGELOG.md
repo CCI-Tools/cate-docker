@@ -7,7 +7,7 @@
 
 __Versions:__
 
-    CATE_VERSION=3.0.0.dev0
+    CATE_VERSION=3.0.0.dev1
     CATE_APP_VERSION=3.0.0-dev.0
     XCUBE_CCI_VERSION=0.8.0
 
