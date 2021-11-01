@@ -1,108 +1,14 @@
 version: '3'
 
 services:
-  cate-base:
-    build:
-      context: .
-      dockerfile: cate-base.dockerfile
-      args:
-        - CATE_BASE_VERSION=${CATE_BASE_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-        - MINICONDA_VERSION=${MINICONDA_VERSION}
-    image: quay.io/ccitools/cate-base:${CATE_BASE_VERSION}
-  cate:
-    build:
-      context: .
-      dockerfile: cate.dockerfile
-      args:
-        - CATE_BASE_VERSION=${CATE_BASE_VERSION}
-        - CATE_VERSION=${CATE_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-        - CATE_INSTALL_MODE=${CATE_INSTALL_MODE}
-        - MINICONDA_VERSION=${MINICONDA_VERSION}
-    image: quay.io/ccitools/cate:${CATE_VERSION}
-    ports:
-      - 4001:4000
-  cate-xcube-cci:
-    build:
-      context: .
-      dockerfile: cate-xcube-cci.dockerfile
-      args:
-        - CATE_BASE_VERSION=${CATE_BASE_VERSION}
-        - CATE_VERSION=${CATE_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-        - CATE_INSTALL_MODE=${CATE_INSTALL_MODE}
-        - MINICONDA_VERSION=${MINICONDA_VERSION}
-        - XCUBE_CCI_INSTALL_MODE=${XCUBE_CCI_INSTALL_MODE}
-        - XCUBE_CCI_VERSION=${XCUBE_CCI_VERSION}
-    image: quay.io/ccitools/cate-xcube:${CATE_VERSION}
-    ports:
-      - 4001:4000
   cate-jupyter:
     build:
       context: .
       dockerfile: cate-jupyter.dockerfile
       args:
         - CATE_VERSION=${CATE_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
+        - CATE_INSTALL_MODE=${CATE_INSTALL_MODE}
         - JUPYTER_VERSION=${JUPYTER_VERSION}
+        - XCUBE_VERSION=${XCUBE_VERSION}
+        - XCUBE_CCI_VERSION=${XCUBE_CCI_VERSION}
     image: quay.io/ccitools/cate-jupyter:${CATE_VERSION}
-# PANGEO NOT USED YET
-#  cate-pangeo:
-#    build:
-#      context: .
-#      dockerfile: cate-pangeo.dockerfile
-#      args:
-#        - CATE_VERSION=${CATE_VERSION}
-#        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-#        - CATE_USER_NAME=${CATE_USER_NAME}
-#        - PANGEO_BASE_NOTEBOOK_VERSION=${PANGEO_BASE_NOTEBOOK_VERSION}
-#    image: quay.io/ccitools/cate-pangeo:${CATE_VERSION}
-#    ports:
-#      - 8888:8888
-  cate-app-stage:
-      build:
-        context: .
-        dockerfile: cate-app.dockerfile
-        args:
-          - CATE_VERSION=${CATE_VERSION}
-          - CATE_APP_VERSION=${CATE_APP_VERSION}
-          - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-          - CATE_USER_NAME=${CATE_USER_NAME}
-          - CATE_MODE=stage
-          - CATE_APP_INSTALL_MODE=${CATE_APP_INSTALL_MODE}
-      image: quay.io/ccitools/cate-webui:${CATE_APP_VERSION}.stage
-      ports:
-        - "82:80"
-  cate-app-local:
-    build:
-      context: .
-      dockerfile: cate-app.dockerfile
-      args:
-        - CATE_VERSION=${CATE_VERSION}
-        - CATE_APP_VERSION=${CATE_APP_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-        - CATE_MODE=local
-        - CATE_APP_INSTALL_MODE=${CATE_APP_INSTALL_MODE}
-    image: quay.io/ccitools/cate-webui:${CATE_APP_VERSION}.local
-    ports:
-      - "82:80"
-  cate-app-prod:
-    build:
-      context: .
-      dockerfile: cate-app.dockerfile
-      args:
-        - CATE_VERSION=${CATE_VERSION}
-        - CATE_APP_VERSION=${CATE_APP_VERSION}
-        - CATE_DOCKER_VERSION=${CATE_DOCKER_VERSION}
-        - CATE_USER_NAME=${CATE_USER_NAME}
-        - CATE_MODE=prod
-    image: quay.io/ccitools/cate-webui:${CATE_APP_VERSION}.prod
-    ports:
-      - "82:80"
-

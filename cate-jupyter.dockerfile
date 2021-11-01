@@ -1,23 +1,45 @@
-ARG CATE_VERSION
-
-FROM quay.io/ccitools/cate:${CATE_VERSION}
-
-ARG CATE_VERSION
-ARG CATE_DOCKER_VERSION
 ARG JUPYTER_VERSION
-ARG CATE_USER_NAME
+FROM jupyter/datascience-notebook:${JUPYTER_VERSION}
 
+ARG CATE_INSTALL_MODE=github
+ARG CATE_VERSION
+ARG XCUBE_VERSION
+ARG XCUBE_CCI_VERSION
+
+# Person responsible
 LABEL maintainer="helge.dzierzon@brockmann-consult.de"
-LABEL name="cate webapi for k8s"
-LABEL cate_version=${CATE_VERSION}
-LABEL cate_docker_version=${CATE_DOCKER_VERSION}
+LABEL name=cate-jupyter
 
-USER ${CATE_USER_NAME}
+RUN echo "cate version: ${CATE_VERSION}";\
+    echo "cate install mode: ${CATE_INSTALL_MODE}";\
+    echo "xcube version: ${XCUBE_VERSION}";\
+    echo "xcube cci version: ${XCUBE_CCI_VERSION}"
 
-RUN source activate cate-env && mamba install -y -c conda-forge jupyterhub=${JUPYTER_VERSION} jupyterlab
+# Update OS and install
+USER root
+RUN apt-get update \
+ && apt-get upgrade -y \
+ && apt-get install -y --no-install-recommends \
+        dnsutils \
+        git \
+        iputils-ping \
+ && rm -rf /var/lib/apt/lists/*
+USER $NB_USER
 
-WORKDIR "/home/${CATE_USER_NAME}"
+RUN conda install -n base -c conda-forge mamba pip
 
-EXPOSE 8888
+WORKDIR /tmp
 
-CMD ["/bin/bash", "-c", "source activate cate-env && jupyter lab --ip=0.0.0.0 --port=8888"]
+COPY scripts/install_cate.sh .
+RUN . install_cate.sh
+
+WORKDIR /tmp/cate
+
+RUN source activate base && mamba install -c conda-forge xcube=${XCUBE_VERSION} xcube-cci=${XCUBE_CCI_VERSION}
+
+RUN mamba install -n base -y  -c conda-forge jupyterlab-git jupyterlab-drawio jupyterlab_code_formatter jupyterlab-spellchecker
+RUN source activate base && pip install nb_black jupyterlab-geojson
+RUN source activate base && mamba install -n base -y  -c conda-forge nbgitpuller
+RUN source activate base && jupyter serverextension enable --py nbgitpuller --sys-prefix
+
+WORKDIR $HOME
