@@ -1,3 +1,12 @@
+## Changes in 2.0.6.dev0 (?)
+Not sure about version, we need to find out how we should version. 
+__Versions:__
+
+    CATE_VERSION=3.0.1.dev1
+    CATE_APP_VERSION=3.0.0
+    XCUBE_CCI_VERSION=0.9.0
+    XCUBE_VERSION=0.9.1
+
 ## Changes in 2.0.5
 - Removed environment.yml
 - Removed cate-xcube.dockerfile as xcube is now included in cate
