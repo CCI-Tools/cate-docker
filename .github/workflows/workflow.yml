@@ -15,7 +15,7 @@ jobs:
     # Build the docker image and push to quay.io
     name: build-docker-image
     env:
-      APP_NAME: cate-jh
+      APP_NAME: cate-jupyter
       ORG_NAME: ccitools
     steps:
       - name: git-checkout
@@ -34,7 +34,7 @@ jobs:
           echo "JUPYTER_VERSION: ${{ steps.dotenv.outputs.jupyter_version }}"
       # Build and push docker image 'latest' to quay.io when the event is a 'push' and branch 'master'
       - uses: mr-smithers-excellent/docker-build-push@v5
-        name: cate-jh-build-push-docker-image-latest
+        name: cate-jupyter-build-push-docker-image-latest
         with:
           image: ${{ env.ORG_NAME }}/${{ env.APP_NAME }}
           tags: ${{ env.CATE_VERSION }}
@@ -46,7 +46,7 @@ jobs:
   update-version:
     env:
       PUSH: 0
-      APP_NAME: cate-jh
+      APP_NAME: cate-jupyter
     runs-on: ubuntu-latest
     needs: build-docker-images
     name: update-tag
