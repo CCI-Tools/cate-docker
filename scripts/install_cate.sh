@@ -10,8 +10,8 @@ if [[ $CATE_INSTALL_MODE == "branch" ]]; then
   cd cate || exit
   git checkout "${CATE_VERSION}"
 
-  mamba env create . || exit
-  source activate cate-env
+#  mamba env create . || exit
+#  source activate cate-env
   python setup.py install
 
   cd ..
@@ -22,8 +22,8 @@ elif [[ $CATE_INSTALL_MODE == "release" ]]; then
 
   cd cate-"${CATE_VERSION#"v"}" || exit
 
-  mamba env create . || exit
-  source activate cate-env
+#  mamba env create . || exit
+#  source activate cate-env
   python setup.py install
 
   cd ..
@@ -33,5 +33,5 @@ else
 fi
 
 
-echo "conda activate cate-env" >> ~/.bashrc
+#echo "conda activate cate-env" >> ~/.bashrc
 
