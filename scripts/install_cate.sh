@@ -10,24 +10,24 @@ if [[ $CATE_INSTALL_MODE == "branch" ]]; then
   cd cate || exit
   git checkout "${CATE_VERSION}"
 
-#  mamba env create . || exit
-#  source activate cate-env
+  mamba env create . || exit
+  source activate cate-env
   python setup.py install
 
   cd ..
   rm -rf cate
 elif [[ $CATE_INSTALL_MODE == "release" ]]; then
   wget https://github.com/CCI-Tools/cate/archive/"${CATE_VERSION}".tar.gz
-  tar xvzf "${CATE_VERSION}".tar.gz
+  tar xvzf cate-"${CATE_VERSION#"v"}".tar.gz
 
   cd cate-"${CATE_VERSION#"v"}" || exit
 
-#  mamba env create . || exit
-#  source activate cate-env
+  mamba env create . || exit
+  source activate cate-env
   python setup.py install
 
   cd ..
-  rm "${CATE_VERSION}".tar.gz
+  rm cate-"${CATE_VERSION#"v"}".tar.gz
 else
   echo "Not implemented."
 fi
