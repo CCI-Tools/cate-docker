@@ -39,7 +39,7 @@ RUN source activate base && mamba install -c conda-forge xcube=${XCUBE_VERSION} 
 
 RUN mamba install -n base -y  -c conda-forge jupyterlab-git jupyterlab-drawio jupyterlab_code_formatter jupyterlab-spellchecker
 RUN source activate base && pip install nb_black jupyterlab-geojson
-RUN source activate base && mamba install -n base -y  -c conda-forge nbgitpuller
+RUN source activate base && mamba install -n base -y  -c conda-forge nbgitpuller cartopy
 RUN source activate base && jupyter serverextension enable --py nbgitpuller --sys-prefix
 
 WORKDIR $HOME
