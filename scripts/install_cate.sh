@@ -18,7 +18,7 @@ if [[ $CATE_INSTALL_MODE == "branch" ]]; then
   rm -rf cate
 elif [[ $CATE_INSTALL_MODE == "release" ]]; then
   wget https://github.com/CCI-Tools/cate/archive/"${CATE_VERSION}".tar.gz
-  tar xvzf cate-"${CATE_VERSION#"v"}".tar.gz
+  tar xvzf "${CATE_VERSION}".tar.gz
 
   cd cate-"${CATE_VERSION#"v"}" || exit
 
@@ -27,7 +27,7 @@ elif [[ $CATE_INSTALL_MODE == "release" ]]; then
   python setup.py install
 
   cd ..
-  rm cate-"${CATE_VERSION#"v"}".tar.gz
+  rm "${CATE_VERSION}".tar.gz
 else
   echo "Not implemented."
 fi
