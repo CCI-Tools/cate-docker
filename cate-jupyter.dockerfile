@@ -41,5 +41,6 @@ RUN mamba install -n base -y  -c conda-forge jupyterlab-git jupyterlab-drawio ju
 RUN source activate base && pip install nb_black jupyterlab-geojson
 RUN source activate base && mamba install -n base -y  -c conda-forge nbgitpuller cartopy
 RUN source activate base && jupyter serverextension enable --py nbgitpuller --sys-prefix
+RUN source activate base && mamba install -c conda-forge s3fs=2021.10.1 fsspec=2021.10.1 -y
 
 WORKDIR $HOME
