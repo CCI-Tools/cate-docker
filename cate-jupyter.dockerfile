@@ -33,6 +33,9 @@ WORKDIR /tmp
 COPY scripts/install_cate.sh .
 RUN . install_cate.sh
 
+COPY scripts/install_mooc_nbs.sh .
+RUN . install_mooc_nbs.sh
+
 WORKDIR /tmp/cate
 
 RUN source activate base && mamba install -c conda-forge xcube=${XCUBE_VERSION} xcube-cci=${XCUBE_CCI_VERSION}
