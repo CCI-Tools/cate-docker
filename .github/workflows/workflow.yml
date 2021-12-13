@@ -38,7 +38,7 @@ jobs:
         name: cate-jupyter-build-push-docker-image-latest
         with:
           image: ${{ env.ORG_NAME }}/${{ env.APP_NAME }}
-          tags: v3.0.1.dev1_mooc_nbs
+          tags: ${{ steps.dotenv.outputs.cate_version }}
           dockerfile: cate-jupyter.dockerfile
           buildArgs: JUPYTER_VERSION=${{ steps.dotenv.outputs.jupyter_version }},CATE_INSTALL_MODE=${{ steps.dotenv.outputs.cate_install_mode }},CATE_VERSION=${{ steps.dotenv.outputs.cate_version }},XCUBE_VERSION=${{ steps.dotenv.outputs.xcube_version }},XCUBE_CCI_VERSION=${{ steps.dotenv.outputs.xcube_cci_version }}
           registry: quay.io
