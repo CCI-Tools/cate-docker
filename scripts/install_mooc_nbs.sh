@@ -7,7 +7,7 @@ echo "######################"
 
 git clone https://github.com/CCI-Tools/cate-edu
 cd cate-edu || exit
-git checkout alicja-xxx-update_of_nbs
+git checkout main
 
 cp -r ECVs/ ~/examples
 
