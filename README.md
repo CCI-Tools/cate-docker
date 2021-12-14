@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/CCI-Tools/cate-docker.svg?branch=master)](https://travis-ci.org/CCI-Tools/cate-docker)
+[![Docker builds](https://github.com/CCI-Tools/cate-docker/actions/workflows/workflow.yml/badge.svg)](https://github.com/CCI-Tools/cate-docker/actions/workflows/workflow.yml)
 
 # Cate Docker Images
 
