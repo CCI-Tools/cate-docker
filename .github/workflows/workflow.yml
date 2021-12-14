@@ -39,9 +39,7 @@ jobs:
       # Build and push docker image 'latest' to quay.io when the event is a 'push' and branch 'master'
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: cate-jupyter-build-push-docker-image-latest
-#        if: ${{ github.event_name == 'push' && steps.release.outputs.tag == 'master'  }}
-        # testing
-        if: ${{ github.event_name == 'push'}}
+        if: ${{ github.event_name == 'push' && steps.release.outputs.tag == 'master'  }}
         with:
           image: ${{ env.ORG_NAME }}/${{ env.APP_NAME }}
           tags: master, latest
