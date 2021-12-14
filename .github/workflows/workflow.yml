@@ -17,14 +17,20 @@ jobs:
     steps:
       - name: git-checkout
         uses: actions/checkout@v2
+      # Load ENV VARS from .env file
       - name: load-dotenv
         id: dotenv
         uses: falti/dotenv-action@v0.2.7
-      # Print some info
+      # Get a concise release tag
+      - name: get-release-tag
+        id: release
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      # Print debug info
       - name: info
         id: info
         run: |
           echo "EVENT: ${{ github.event_name }}"
+          echo "RELEASE_TAG: ${{ steps.release.outputs.tag }}"
           echo "CATE_VERSION: ${{ steps.dotenv.outputs.cate_version }}"
           echo "CATE_INSTALL_MODE: ${{ steps.dotenv.outputs.cate_install_mode }}"
           echo "XCUBE_VERSION: ${{ steps.dotenv.outputs.xcube_version }}"
