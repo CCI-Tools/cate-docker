@@ -1,7 +1,7 @@
 ARG JUPYTER_VERSION
-FROM jupyter/datascience-notebook:${JUPYTER_VERSION}
+FROM jupyter/scipy-notebook:${JUPYTER_VERSION}
 
-ARG CATE_INSTALL_MODE=github
+ARG CATE_INSTALL_MODE
 ARG CATE_VERSION
 ARG XCUBE_VERSION
 ARG XCUBE_CCI_VERSION
@@ -33,13 +33,16 @@ WORKDIR /tmp
 COPY scripts/install_cate.sh .
 RUN . install_cate.sh
 
+COPY scripts/install_mooc_nbs.sh .
+RUN . install_mooc_nbs.sh
+
 WORKDIR /tmp/cate
 
 RUN source activate base && mamba install -c conda-forge xcube=${XCUBE_VERSION} xcube-cci=${XCUBE_CCI_VERSION}
 
 RUN mamba install -n base -y  -c conda-forge jupyterlab-git jupyterlab-drawio jupyterlab_code_formatter jupyterlab-spellchecker
 RUN source activate base && pip install nb_black jupyterlab-geojson
-RUN source activate base && mamba install -n base -y  -c conda-forge nbgitpuller
+RUN source activate base && mamba install -n base -y  -c conda-forge nbgitpuller cartopy
 RUN source activate base && jupyter serverextension enable --py nbgitpuller --sys-prefix
 
 WORKDIR $HOME

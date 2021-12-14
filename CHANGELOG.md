@@ -1,5 +1,4 @@
-## Changes in 2.0.6.dev0 (?)
-Not sure about version, we need to find out how we should version. 
+## Changes in 3.0.1.dev1 
 __Versions:__
 
     CATE_VERSION=3.0.1.dev1
