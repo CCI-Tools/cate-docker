@@ -30,7 +30,7 @@ jobs:
         id: info
         run: |
           echo "EVENT: ${{ github.event_name }}"
-          echo "RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          echo "RELEASE_TAG: ${{ steps.release.outputs.tag }}"
           echo "CATE_VERSION: ${{ steps.dotenv.outputs.cate_version }}"
           echo "CATE_INSTALL_MODE: ${{ steps.dotenv.outputs.cate_install_mode }}"
           echo "XCUBE_VERSION: ${{ steps.dotenv.outputs.xcube_version }}"
