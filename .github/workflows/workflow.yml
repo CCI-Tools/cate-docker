@@ -36,6 +36,19 @@ jobs:
       # Build and push docker image 'latest' to quay.io when the event is a 'push' and branch 'master'
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: cate-jupyter-build-push-docker-image-latest
+        if: ${{ github.event_name == 'push' && steps.release.outputs.tag == 'master'  }}
+        with:
+          image: ${{ env.ORG_NAME }}/${{ env.APP_NAME }}
+          tags: master, latest
+          dockerfile: cate-jupyter.dockerfile
+          buildArgs: JUPYTER_VERSION=${{ steps.dotenv.outputs.jupyter_version }},CATE_INSTALL_MODE=${{ steps.dotenv.outputs.cate_install_mode }},CATE_VERSION=${{ steps.dotenv.outputs.cate_version }},XCUBE_VERSION=${{ steps.dotenv.outputs.xcube_version }},XCUBE_CCI_VERSION=${{ steps.dotenv.outputs.xcube_cci_version }}
+          registry: quay.io
+          username: ${{ secrets.QUAY_DOCKER_REPO_USERNAME }}
+          password: ${{ secrets.QUAY_DOCKER_REPO_PASSWORD }}
+      # Build and push docker release to quay.io when the event is a 'release'
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: cate-jupyter-build-push-docker-image-release
+        if: ${{ github.event_name == 'release' }}
         with:
           image: ${{ env.ORG_NAME }}/${{ env.APP_NAME }}
           tags: ${{ steps.dotenv.outputs.cate_version }}
@@ -44,69 +57,3 @@ jobs:
           registry: quay.io
           username: ${{ secrets.QUAY_DOCKER_REPO_USERNAME }}
           password: ${{ secrets.QUAY_DOCKER_REPO_PASSWORD }}
-#  update-version:
-#    env:
-#      PUSH: 0
-#      APP_NAME: cate-jupyter
-#    runs-on: ubuntu-latest
-#    needs: build-docker-images
-#    name: update-tag
-#    steps:
-#      - name: git-checkout
-#        uses: actions/checkout@v2
-#      - uses: actions/checkout@v2
-#        with:
-#          repository: bc-org/k8s-configs
-#          token: ${{ secrets.XCUBE_GITHUB_K8S_CONFIGS_PAT }}
-#          path: k8s
-#      - name: deployment-phase
-#        id: deployment-phase
-#        uses: bc-org/gha-determine-phase@v0.1
-#        with:
-#          event_name: ${{ github.event_name }}
-#          tag: ${{ steps.release.outputs.tag }}
-#      - name: get-hash
-#        id: get-hash
-#        run: |
-#          HASH=$(skopeo inspect docker://quay.io/bcdev/${{ env.APP_NAME }}:${{ steps.release.outputs.tag }} | jq '.Digest')
-#          if [[ "$HASH" == *"sha256"* ]]; then
-#            echo ::set-output name=hash::$HASH
-#          else
-#            echo "No hash present. Using none as hash. This will use the version tag instead for deployment."
-#            echo ::set-output name=hash::none
-#          fi
-#      - name: info
-#        run: |
-#          echo "Event: ${{ github.event_name }}"
-#          echo "Deployment Stage: ${{ steps.deployment-phase.outputs.phase }}"
-#          echo "Release Tag: ${{ steps.release.outputs.tag }}"
-#          echo "Deployment Release Tag: ${{ steps.deployment-phase.outputs.tag }}"
-#          echo "Deployment Digest: ${{ steps.get-hash.outputs.hash }}"
-#      - name: set-version-tag-xcube-gen
-#        uses: bc-org/update-application-version-tags@main
-#        with:
-#          app: ${{ env.APP_NAME }}
-#          phase: ${{ steps.deployment-phase.outputs.phase }}
-#          delimiter: ' '
-#          tag: ${{ steps.deployment-phase.outputs.tag }}
-#          hash: ${{ steps.get-hash.outputs.hash }}
-#          working-directory: "./k8s/xcube-gen/helm"
-#      - name: cat-result
-#        working-directory: "./k8s/xcube-gen/helm"
-#        run: |
-#          head values-dev.yaml
-#          head values-stage.yaml
-#          head values-prod.yaml
-#      - name: Pushes to another repository
-#        # Don't run if run locally and should be ignored
-#        if: ${{ steps.deployment-phase.outputs.phase != 'ignore' && !env.ACT }}
-#        uses: cpina/github-action-push-to-another-repository@main
-#        env:
-#          API_TOKEN_GITHUB: ${{ secrets.XCUBE_GITHUB_K8S_CONFIGS_PAT }}
-#        with:
-#          source-directory: 'k8s'
-#          destination-github-username: 'bc-org'
-#          destination-repository-name: 'k8s-configs'
-#          user-email: bcdev@brockmann-consult.de
-#          target-branch: main
-#          commit-message: ${{ github.event.release }}. Set version to ${{ steps.release.outputs.tag }}
