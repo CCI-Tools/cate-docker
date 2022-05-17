@@ -37,10 +37,9 @@ WORKDIR /tmp
 COPY scripts/install_cate.sh .
 RUN . install_cate.sh
 
-COPY scripts/install_xcube.sh .
-RUN ls
-RUN . install_xube.sh xcube ${XCUBE_VERSION} ${XCUBE_INSTALL_MODE}
-RUN . install_xube.sh xcube-cci ${XCUBE_CCI_VERSION} ${XCUBE_INSTALL_MODE}
+#COPY scripts/install_xcube.sh .
+#RUN . install_xube.sh xcube ${XCUBE_VERSION} ${XCUBE_INSTALL_MODE}
+#RUN . install_xube.sh xcube-cci ${XCUBE_CCI_VERSION} ${XCUBE_INSTALL_MODE}
 
 COPY scripts/install_mooc_nbs.sh .
 RUN if [[ ${INSTALL_MOOC} == '1' ]]; then . install_mooc_nbs.sh; fi;
