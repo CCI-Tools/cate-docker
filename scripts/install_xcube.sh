@@ -4,11 +4,11 @@ PACKAGE=$1;
 PACKAGE_VERSION=$2;
 INSTALL_MODE=$3
 
-echo "############################################"
-echo "INSTALLING ${PACKAGE}-${PACKAGE_VERSION}"
-echo "############################################"
+echo "###########################################################"
+echo "INSTALLING ${PACKAGE}-${PACKAGE_VERSION} from $INSTALL_MODE"
+echo "###########################################################"
 
-if [[ INSTALL_MODE == "branch" ]]; then
+if [[ $INSTALL_MODE == "branch" ]]; then
   git clone https://github.com/dcs4cop/"${PACKAGE}"
   cd "${PACKAGE}" || exit
   git checkout "${PACKAGE_VERSION}"
@@ -17,7 +17,7 @@ if [[ INSTALL_MODE == "branch" ]]; then
   source activate base && mamba env update -n base
   source activate base && pip install .
   cd .. && rm -rf "${PACKAGE}"
-elif [[ INSTALL_MODE == "release" ]]; then
+elif [[ $INSTALL_MODE == "release" ]]; then
   # Receive version number if PACKAGE_VERSION is latest
   if [[ $PACKAGE_VERSION == "latest" ]]; then
     PACKAGE_VERSION=$(curl -sL https://api.github.com/repos/dcs4cop/"${PACKAGE}"/releases/latest | jq -r '.name')
