@@ -38,7 +38,7 @@ COPY scripts/install_cate.sh .
 RUN . install_cate.sh
 
 COPY scripts/install_xcube.sh .
-RUN . install_xube.sh
+RUN ls
 RUN . install_xube.sh xcube ${XCUBE_VERSION} ${XCUBE_INSTALL_MODE}
 RUN . install_xube.sh xcube-cci ${XCUBE_CCI_VERSION} ${XCUBE_INSTALL_MODE}
 
