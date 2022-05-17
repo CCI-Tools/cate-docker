@@ -47,7 +47,7 @@ RUN if [[ ${INSTALL_MOOC} == '1' ]]; then . install_mooc_nbs.sh; fi;
 WORKDIR /tmp/cate
 
 RUN source activate base && mamba install -n base -y -c conda-forge jupyterlab-git jupyterlab-drawio jupyterlab_code_formatter jupyterlab-spellchecker nbgitpuller cartopy graphviz
-#RUN mamba install -n base -y -c conda-forge xcube=${XCUBE_VERSION} xcube-cci=${XCUBE_CCI_VERSION}
+RUN mamba install -n base -y -c conda-forge rasterio=1.2.4
 
 RUN pip install nb_black jupyterlab-geojson
 RUN jupyter serverextension enable --py nbgitpuller --sys-prefix
