@@ -44,6 +44,9 @@ RUN . install_xcube.sh xcube-cci ${XCUBE_CCI_VERSION} ${XCUBE_INSTALL_MODE}
 COPY scripts/install_mooc_nbs.sh .
 RUN if [[ ${INSTALL_MOOC} == '1' ]]; then . install_mooc_nbs.sh; fi;
 
+COPY scripts/install_beginners_notebook.sh .
+RUN . install_beginners_notebook.sh
+
 WORKDIR /tmp/cate
 
 RUN source activate base && mamba install -n base -y -c conda-forge jupyterlab-git jupyterlab-drawio jupyterlab_code_formatter jupyterlab-spellchecker nbgitpuller cartopy graphviz
