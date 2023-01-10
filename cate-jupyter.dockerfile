@@ -16,6 +16,7 @@ RUN echo "cate version: ${CATE_VERSION}";\
     echo "cate install mode: ${CATE_INSTALL_MODE}";\
     echo "xcube install mode: ${XCUBE_INSTALL_MODE}";\
     echo "xcube version: ${XCUBE_VERSION}";\
+    echo "xcube install mode: ${XCUBE_CCI_INSTALL_MODE}";\
     echo "xcube cci version: ${XCUBE_CCI_VERSION}";\
     echo "install mooc notebooks: ${INSTALL_MOOC}"
 
@@ -36,7 +37,7 @@ WORKDIR /tmp
 
 COPY scripts/install_xcube.sh .
 RUN . install_xcube.sh xcube ${XCUBE_VERSION} ${XCUBE_INSTALL_MODE}
-RUN . install_xcube.sh xcube-cci ${XCUBE_CCI_VERSION} ${XCUBE_INSTALL_MODE}
+RUN . install_xcube.sh xcube-cci ${XCUBE_CCI_VERSION} ${XCUBE_CCI_INSTALL_MODE}
 
 COPY scripts/install_cate.sh .
 RUN . install_cate.sh
