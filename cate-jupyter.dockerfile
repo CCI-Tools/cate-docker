@@ -57,6 +57,4 @@ RUN mamba install -n base -y -c conda-forge rasterio=1.2.4
 RUN pip install nb_black jupyterlab-geojson
 RUN jupyter serverextension enable --py nbgitpuller --sys-prefix
 
-ENV READ_CEDA_CATALOGUE=0
-
 WORKDIR $HOME
