@@ -1,3 +1,11 @@
+## Changes in 4.0.0.dev0
+__Versions:__
+
+    CATE_VERSION=3.1.4.dev4
+    XCUBE_CCI_VERSION=0.9.8.dev0
+    XCUBE_VERSION=0.13.0.dev8
+
+
 ## Changes in 3.0.1.dev1 
 __Versions:__
 
