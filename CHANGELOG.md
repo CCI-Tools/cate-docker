@@ -1,4 +1,13 @@
+## Changes in 4.0.0.dev1
+__Versions:__
+
+    CATE_VERSION=3.1.4.dev4
+    XCUBE_CCI_VERSION=0.9.8.dev1
+    XCUBE_VERSION=0.13.0.dev8
+
 ## Changes in 4.0.0.dev0
+- added argument XCUBE_CCI_INSTALL_MODE to allow using xcube cci code from branches
+
 __Versions:__
 
     CATE_VERSION=3.1.4.dev4
