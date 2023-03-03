@@ -32,8 +32,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
-# restrict pip to allow for install of nb_black
-RUN conda install -n base -c conda-forge mamba pip=22.3.1
+RUN conda install -n base -c conda-forge mamba pip
 
 WORKDIR /tmp
 
@@ -52,10 +51,10 @@ RUN . install_beginners_notebook.sh
 
 WORKDIR /tmp/cate
 
-RUN source activate base && mamba install -n base -y -c conda-forge jupyterlab-git jupyterlab-drawio jupyterlab_code_formatter jupyterlab-spellchecker nbgitpuller cartopy graphviz
+RUN source activate base && mamba install -n base -y -c conda-forge jupyterlab-git jupyterlab-drawio jupyterlab_code_formatter jupyterlab-spellchecker nbgitpuller cartopy graphviz nb_black
 RUN mamba install -n base -y -c conda-forge rasterio=1.2.4
 
-RUN pip install nb_black jupyterlab-geojson
+RUN pip install jupyterlab-geojson
 RUN jupyter serverextension enable --py nbgitpuller --sys-prefix
 
 WORKDIR $HOME
