@@ -32,7 +32,8 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 USER $NB_USER
 
-RUN conda install -n base -c conda-forge mamba pip
+# restrict pip to allow for install of nb_black
+RUN conda install -n base -c conda-forge mamba pip<=22.3.1
 
 WORKDIR /tmp
 
