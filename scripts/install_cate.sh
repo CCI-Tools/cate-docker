@@ -1,5 +1,7 @@
 #!/bin/env bash
 
+CATE_VERSION=$1;
+CATE_INSTALL_MODE=$2;
 
 echo "###################################################################"
 echo "INSTALLING cate-${CATE_VERSION} using mode $CATE_INSTALL_MODE"
