@@ -23,6 +23,7 @@ RUN apt-get update \
         iputils-ping \
  && rm -rf /var/lib/apt/lists/* \
 
+USER $MAMBA_USER
 WORKDIR /tmp/cate
 
 COPY scripts/install_xcube.sh .
