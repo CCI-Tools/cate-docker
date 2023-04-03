@@ -14,6 +14,7 @@ jobs:
     env:
       APP_NAME: cate-jupyter
       ORG_NAME: ccitools
+      CATE_APP_NAME: cate
     steps:
       - name: git-checkout
         uses: actions/checkout@v2
@@ -43,6 +44,7 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: cate-jupyter-build-push-docker-image-latest
         if: ${{ github.event_name == 'push' && steps.release.outputs.tag == 'master'  }}
+
         with:
           image: ${{ env.ORG_NAME }}/${{ env.APP_NAME }}
           tags: master, latest
@@ -60,6 +62,30 @@ jobs:
           tags: ${{ steps.release.outputs.tag }}
           dockerfile: cate-jupyter.dockerfile
           buildArgs: JUPYTER_VERSION=${{ steps.dotenv.outputs.jupyter_version }},CATE_INSTALL_MODE=${{ steps.dotenv.outputs.cate_install_mode }},CATE_VERSION=${{ steps.dotenv.outputs.cate_version }},XCUBE_INSTALL_MODE=${{ steps.dotenv.outputs.xcube_install_mode }},XCUBE_VERSION=${{ steps.dotenv.outputs.xcube_version }},XCUBE_CCI_INSTALL_MODE=${{ steps.dotenv.outputs.xcube_cci_install_mode }},XCUBE_CCI_VERSION=${{ steps.dotenv.outputs.xcube_cci_version }},INSTALL_MOOC=${{ steps.dotenv.outputs.install_mooc }}
+          registry: quay.io
+          username: ${{ secrets.QUAY_DOCKER_REPO_USERNAME }}
+          password: ${{ secrets.QUAY_DOCKER_REPO_PASSWORD }}
+      # Build and push cate docker image 'latest' to quay.io when the event is a 'push' and branch 'master'
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: cate-build-push-docker-image-latest
+        if: ${{ github.event_name == 'push' && steps.release.outputs.tag == 'master'  }}
+        with:
+          image: ${{ env.ORG_NAME }}/${{ env.CATE_APP_NAME }}
+          tags: master, latest
+          dockerfile: cate.Dockerfile
+          buildArgs: CATE_INSTALL_MODE=${{ steps.dotenv.outputs.cate_install_mode }},CATE_VERSION=${{ steps.dotenv.outputs.cate_version }},XCUBE_INSTALL_MODE=${{ steps.dotenv.outputs.xcube_install_mode }},XCUBE_VERSION=${{ steps.dotenv.outputs.xcube_version }},XCUBE_CCI_INSTALL_MODE=${{ steps.dotenv.outputs.xcube_cci_install_mode }},XCUBE_CCI_VERSION=${{ steps.dotenv.outputs.xcube_cci_version }},INSTALL_MOOC=${{ steps.dotenv.outputs.install_mooc }}
+          registry: quay.io
+          username: ${{ secrets.QUAY_DOCKER_REPO_USERNAME }}
+          password: ${{ secrets.QUAY_DOCKER_REPO_PASSWORD }}
+      # Build and push cate docker release to quay.io when the event is a 'release'
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: cate-build-push-docker-image-release
+        if: ${{ github.event_name == 'release' }}
+        with:
+          image: ${{ env.ORG_NAME }}/${{ env.CATE_APP_NAME }}
+          tags: ${{ steps.release.outputs.tag }}
+          dockerfile: cate.Dockerfile
+          buildArgs: CATE_INSTALL_MODE=${{ steps.dotenv.outputs.cate_install_mode }},CATE_VERSION=${{ steps.dotenv.outputs.cate_version }},XCUBE_INSTALL_MODE=${{ steps.dotenv.outputs.xcube_install_mode }},XCUBE_VERSION=${{ steps.dotenv.outputs.xcube_version }},XCUBE_CCI_INSTALL_MODE=${{ steps.dotenv.outputs.xcube_cci_install_mode }},XCUBE_CCI_VERSION=${{ steps.dotenv.outputs.xcube_cci_version }},INSTALL_MOOC=${{ steps.dotenv.outputs.install_mooc }}
           registry: quay.io
           username: ${{ secrets.QUAY_DOCKER_REPO_USERNAME }}
           password: ${{ secrets.QUAY_DOCKER_REPO_PASSWORD }}
