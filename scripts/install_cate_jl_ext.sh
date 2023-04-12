@@ -13,7 +13,7 @@ if [[ $CATE_JL_EXT_INSTALL_MODE == "branch" ]]; then
   git clone https://github.com/CCI-Tools/cate-jl-ext
   cd cate-jl-ext || exit
   git checkout "${CATE_JL_EXT_VERSION}"
-  python setup.py install
+  pip install -e .
   cd ..
   rm -rf cate-jl-ext
 
@@ -23,7 +23,7 @@ elif [[ $CATE_INSTALL_MODE == "release" ]]; then
   wget https://github.com/CCI-Tools/cate-jl-ext/archive/"${CATE_JL_EXT_VERSION}".tar.gz
   tar xvzf "${CATE_JL_EXT_VERSION}".tar.gz
   cd cate-"${CATE_JL_EXT_VERSION#"v"}" || exit
-  python setup.py install
+  pip install -e .
   cd ..
   rm "${CATE_JL_EXT_VERSION}".tar.gz
 
