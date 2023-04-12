@@ -8,6 +8,8 @@ ARG XCUBE_VERSION
 ARG XCUBE_CCI_INSTALL_MODE
 ARG XCUBE_CCI_VERSION
 ARG INSTALL_MOOC
+ARG CATE_JL_EXT_VERSION
+ARG CATE_JL_EXT_INSTALL_MODE
 
 # Person responsible
 LABEL maintainer="tonio.fincke@brockmann-consult.de"
@@ -41,7 +43,7 @@ RUN . install_xcube.sh xcube ${XCUBE_VERSION} ${XCUBE_INSTALL_MODE}
 RUN . install_xcube.sh xcube-cci ${XCUBE_CCI_VERSION} ${XCUBE_CCI_INSTALL_MODE}
 
 COPY scripts/install_cate.sh .
-RUN . install_cate.sh
+RUN . install_cate.sh ${CATE_VERSION} ${CATE_INSTALL_MODE}
 
 COPY scripts/install_mooc_nbs.sh .
 RUN if [[ ${INSTALL_MOOC} == '1' ]]; then . install_mooc_nbs.sh; fi;
@@ -56,5 +58,8 @@ RUN mamba install -n base -y -c conda-forge rasterio=1.2.4
 
 RUN pip install jupyterlab-geojson
 RUN jupyter serverextension enable --py nbgitpuller --sys-prefix
+
+COPY scripts/install_cate_jl_ext.sh .
+RUN . install_cate_jl_ext.sh ${CATE_JL_EXT_VERSION} ${CATE_JL_EXT_INSTALL_MODE}
 
 WORKDIR $HOME
