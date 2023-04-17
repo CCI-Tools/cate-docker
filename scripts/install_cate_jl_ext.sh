@@ -17,7 +17,7 @@ if [[ $CATE_JL_EXT_INSTALL_MODE == "branch" ]]; then
   cd ..
   rm -rf cate-jl-ext
 
-elif [[ $CATE_INSTALL_MODE == "release" ]]; then
+elif [[ $CATE_JL_EXT_INSTALL_MODE == "release" ]]; then
   mamba install -c conda-forge -c nodefaults jupyterlab jupyter-server-proxy jupyter-packing
   pip install build
   wget https://github.com/CCI-Tools/cate-jl-ext/archive/"${CATE_JL_EXT_VERSION}".tar.gz
@@ -27,7 +27,7 @@ elif [[ $CATE_INSTALL_MODE == "release" ]]; then
   cd ..
   rm "${CATE_JL_EXT_VERSION}".tar.gz
 
-elif [[ $CATE_INSTALL_MODE == "pip" ]]; then
+elif [[ $CATE_JL_EXT_INSTALL_MODEE == "pip" ]]; then
   pip install cate-jl-ext
 
 else
